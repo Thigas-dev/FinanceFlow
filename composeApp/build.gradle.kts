@@ -113,6 +113,12 @@ android {
     }
 }
 
+// O KSP dos alvos iOS precisa da distribuição Kotlin/Native (stdlib) já baixada; numa máquina
+// zerada ele pode rodar antes do download e falhar com "cannot find required type ... Continuation".
+tasks.matching { it.name.startsWith("kspKotlinIos") }.configureEach {
+    dependsOn("commonizeNativeDistribution")
+}
+
 dependencies {
     listOf("kspAndroid", "kspIosArm64", "kspIosSimulatorArm64").forEach { add(it, "androidx.room:room-compiler:$room") }
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.8.2")

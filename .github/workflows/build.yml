@@ -28,7 +28,7 @@ jobs:
         run: |
           chmod +x gradlew
           set -o pipefail
-          ./gradlew :composeApp:linkReleaseFrameworkIosArm64 --console=plain 2>&1 | tee gradle.log
+          ./gradlew :composeApp:linkReleaseFrameworkIosArm64 --console=plain --stacktrace 2>&1 | tee gradle.log
 
       - name: Gerar projeto Xcode
         run: |
@@ -65,7 +65,7 @@ jobs:
         run: |
           for f in gradle.log xcodebuild.log; do
             [ -f "$f" ] || continue
-            grep -E "^e: |error:|\* What went wrong|Exception|FAILED|BUILD FAILED" "$f" \
+            grep -E "^e: |error:|\* What went wrong|Caused by|FAILED|BUILD FAILED" "$f" \
               | grep -v "warning:" | head -40 | cut -c1-900 \
               | while IFS= read -r line; do echo "::error title=$f::$line"; done
             if grep -q "What went wrong" "$f"; then
