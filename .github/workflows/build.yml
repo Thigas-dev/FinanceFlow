@@ -8,11 +8,11 @@ jobs:
   ios:
     name: iOS (.ipa sem assinatura)
     runs-on: macos-15
-    timeout-minutes: 60
+    timeout-minutes: 75
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
@@ -24,14 +24,20 @@ jobs:
           sudo xcode-select -s "$XCODE"
           xcodebuild -version
 
+      - name: Compilar código Kotlin (ComposeApp.framework)
+        run: |
+          chmod +x gradlew
+          set -o pipefail
+          ./gradlew :composeApp:linkReleaseFrameworkIosArm64 --console=plain 2>&1 | tee gradle.log
+
       - name: Gerar projeto Xcode
         run: |
           brew install xcodegen
-          chmod +x gradlew
           cd iosApp && xcodegen generate
 
       - name: Compilar app
         run: |
+          set -o pipefail
           xcodebuild \
             -project iosApp/FinanceFlow.xcodeproj \
             -scheme FinanceFlow \
@@ -40,7 +46,7 @@ jobs:
             -destination 'generic/platform=iOS' \
             -derivedDataPath build/ios \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
-            build
+            build 2>&1 | tee xcodebuild.log
 
       - name: Empacotar .ipa
         run: |
@@ -48,18 +54,41 @@ jobs:
           cp -R build/ios/Build/Products/Release-iphoneos/FinanceFlow.app Payload/
           zip -qr FinanceFlow-unsigned.ipa Payload
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: FinanceFlow-iOS
           path: FinanceFlow-unsigned.ipa
+
+      # Em caso de falha, publica as linhas de erro como anotações (visíveis no resumo da execução).
+      - name: Resumir erros
+        if: failure()
+        run: |
+          for f in gradle.log xcodebuild.log; do
+            [ -f "$f" ] || continue
+            grep -E "^e: |error:|\* What went wrong|Exception|FAILED|BUILD FAILED" "$f" \
+              | grep -v "warning:" | head -40 | cut -c1-900 \
+              | while IFS= read -r line; do echo "::error title=$f::$line"; done
+            if grep -q "What went wrong" "$f"; then
+              grep -A6 "What went wrong" "$f" | head -20 | tr '\n' ' ' | cut -c1-1500 | sed 's/^/::error title=gradle-causa::/'
+              echo
+            fi
+          done
+
+      - uses: actions/upload-artifact@v5
+        if: failure()
+        with:
+          name: logs-ios
+          path: |
+            gradle.log
+            xcodebuild.log
 
   android:
     name: Android (testes + APK)
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
@@ -67,7 +96,7 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew :composeApp:testDebugUnitTest :composeApp:assembleDebug
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: FinanceFlow-Android
           path: composeApp/build/outputs/apk/debug/*.apk

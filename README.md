@@ -34,7 +34,7 @@ repositórios privados têm cota mensal de minutos, e minutos de macOS contam em
    git add .
    git commit -m "FinanceFlow"
    git branch -M main
-   git remote add origin https://github.com/SEU_USUARIO/financeflow.git
+   git remote add origin https://github.com/Thigas-dev/FinanceFlow.git
    git push -u origin main
    ```
 3. No GitHub, abra **Actions → Build**. Quando o job **iOS** terminar (~15–25 min), baixe o artefato
