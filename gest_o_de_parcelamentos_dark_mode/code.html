@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinanceFlow - Parcelamentos</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#171f33",
+            "secondary": "#7bd0ff",
+            "on-primary-fixed": "#002113",
+            "tertiary": "#ffb2b7",
+            "on-secondary-fixed": "#001e2c",
+            "on-secondary-fixed-variant": "#004c69",
+            "secondary-container": "#00a6e0",
+            "surface-tint": "#4edea3",
+            "tertiary-fixed-dim": "#ffb2b7",
+            "on-primary-container": "#00422b",
+            "error": "#ffb4ab",
+            "on-secondary": "#00354a",
+            "error-container": "#93000a",
+            "on-tertiary": "#67001b",
+            "outline": "#86948a",
+            "on-primary": "#003824",
+            "primary-container": "#10b981",
+            "surface-variant": "#2d3449",
+            "on-tertiary-fixed": "#40000d",
+            "primary-fixed-dim": "#4edea3",
+            "surface-dim": "#0b1326",
+            "inverse-on-surface": "#283044",
+            "on-surface-variant": "#bbcabf",
+            "secondary-fixed": "#c4e7ff",
+            "on-primary-fixed-variant": "#005236",
+            "on-tertiary-fixed-variant": "#92002a",
+            "primary": "#4edea3",
+            "surface-bright": "#31394d",
+            "surface-container-low": "#131b2e",
+            "tertiary-container": "#ff7886",
+            "surface-container-highest": "#2d3449",
+            "on-tertiary-container": "#780021",
+            "background": "#0b1326",
+            "secondary-fixed-dim": "#7bd0ff",
+            "on-secondary-container": "#00374d",
+            "surface-container-lowest": "#060e20",
+            "outline-variant": "#2a374f",
+            "surface-container-high": "#222a3d",
+            "on-error": "#690005",
+            "inverse-surface": "#dae2fd",
+            "on-error-container": "#ffdad6",
+            "inverse-primary": "#006c49",
+            "tertiary-fixed": "#ffdadb",
+            "primary-fixed": "#6ffbbe",
+            "on-background": "#f8fafc",
+            "surface": "#0b1326",
+            "on-surface": "#f8fafc"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "margin": "1rem",
+            "space-lg": "1.5rem",
+            "gutter-desktop": "1.5rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "gutter": "1rem",
+            "space-xs": "0.25rem",
+            "margin-desktop": "2rem"
+          },
+          "fontFamily": {
+            "numeric-table": ["Inter"],
+            "numeric-currency": ["Inter"],
+            "headline-md": ["Manrope", "Inter"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Manrope", "Inter"],
+            "label-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-sm": ["Manrope", "Inter"],
+            "display-lg-mobile": ["Manrope", "Inter"],
+            "display-lg": ["Manrope", "Inter"],
+            "label-lg": ["Inter"]
+          },
+          "fontSize": {
+            "numeric-table": ["14px", { "lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500" }],
+            "numeric-currency": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "600" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-[#0B1326] text-[#F8FAFC] antialiased min-h-screen flex flex-col justify-between selection:bg-primary-container selection:text-white">
+<!-- Mobile Wrapper with standard fintech constraint -->
+<div class="w-full max-w-lg mx-auto flex-1 flex flex-col pb-24">
+<!-- TopAppBar Anchor from Shared Components -->
+<header class="bg-[#0B1326]/90 backdrop-blur-md border-b border-[#2A374F] sticky top-0 z-40">
+<div class="flex justify-between items-center w-full px-margin h-14 max-w-lg mx-auto">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full overflow-hidden ring-1 ring-[#2A374F] flex-shrink-0 bg-[#131B2E]">
+<img class="w-full h-full object-cover" data-alt="A sophisticated close-up studio portrait of a young professional finance user in modern minimalist attire, bathed in high-key natural light against a subtle emerald and soft stone backdrop, exuding calm confidence and financial control in a clean tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAB_WPkOTzhVLw_8HXdUiHtY0vrs9LC4P_L7kSDeIquIv6MevP3nHvAo2UdvHW2m5Zk4PrZQf-174APnJSuZfnKJDFeN8l5_1FjAIgMhLOa7EkmHFmbwZgoZmzUAlAYU0p-RtFkM9Kw3en-Zg8bvuQQdf5CrVG8U_wXY4m5PpAxJ-LqFyuXWYDJzpW3rBi-Il-9Squk26oA3mO0Kwj5-NVhR2Oij95QPBkIuefJ7KySAYfhCGMPLSF5w"/>
+</div>
+<span class="text-headline-sm font-headline-sm text-[#4EDE83] tracking-tight">FinanceFlow</span>
+</div>
+<button aria-label="Notificações" class="p-2 text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#131B2E] transition-colors rounded-lg active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="px-margin pt-4 flex-1 space-y-5">
+<!-- Page Headline & Subtitle -->
+<section class="space-y-1">
+<h1 class="text-headline-lg font-headline-lg text-[#F8FAFC] tracking-tight">Parcelamentos</h1>
+<p class="text-body-md font-body-md text-[#94A3B8]">Controle de compras parceladas e prazos</p>
+</section>
+<!-- Card Resumo no Topo -->
+<section class="bg-[#131B2E] border border-[#2A374F] rounded-xl p-space-md shadow-lg relative overflow-hidden">
+<!-- Top accent status line as per fintech identity: Cobalt for commitments/credit -->
+<div class="absolute top-0 left-0 right-0 h-[3px] bg-[#38BDF8]"></div>
+<div class="flex justify-between items-start pt-1">
+<div>
+<span class="text-label-md font-label-md text-[#94A3B8] flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-[#38BDF8]">pie_chart</span>
+              Total Comprometido em Parcelas
+            </span>
+<div class="text-numeric-currency font-numeric-currency text-[#F8FAFC] mt-1">
+              R$ 3.840,00
+            </div>
+</div>
+<div class="flex items-center gap-1.5 bg-[#38BDF8]/10 border border-[#38BDF8]/20 px-2.5 py-1 rounded-lg">
+<span class="w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse"></span>
+<span class="text-label-md font-label-md text-[#7BD0FF] font-semibold">18 ativas</span>
+</div>
+</div>
+<!-- Metric Split Sub-panel -->
+<div class="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-[#2A374F]/60">
+<div class="bg-[#0B1326] p-3 rounded-lg border border-[#2A374F]">
+<div class="flex items-center gap-1.5 text-label-md font-label-md text-[#10B981]">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Já Pago</span>
+</div>
+<div class="text-numeric-table font-numeric-table text-[#4EDE83] font-semibold mt-1">
+              R$ 1.620,00
+            </div>
+<div class="text-body-sm font-body-sm text-[#94A3B8] mt-0.5">42,2% liquidado</div>
+</div>
+<div class="bg-[#0B1326] p-3 rounded-lg border border-[#2A374F]">
+<div class="flex items-center gap-1.5 text-label-md font-label-md text-[#FFB2B7]">
+<span class="material-symbols-outlined text-[16px]">pending_actions</span>
+<span>Restante</span>
+</div>
+<div class="text-numeric-table font-numeric-table text-[#F8FAFC] font-semibold mt-1">
+              R$ 2.220,00
+            </div>
+<div class="text-body-sm font-body-sm text-[#94A3B8] mt-0.5">18 parcelas futuras</div>
+</div>
+</div>
+</section>
+<!-- Segmented Control / Tabs -->
+<nav aria-label="Categorias financeiras" class="bg-[#131B2E] p-1 rounded-xl flex items-center gap-1 border border-[#2A374F]">
+<button class="flex-1 py-1.5 px-3 rounded-lg text-label-md font-label-md text-[#4EDE83] bg-[#222A3D] shadow-sm font-semibold transition-all">
+          Compras Parceladas
+        </button>
+<button class="flex-1 py-1.5 px-3 rounded-lg text-label-md font-label-md text-[#94A3B8] hover:text-[#F8FAFC] transition-all">
+          Contas a Pagar
+        </button>
+<button class="flex-1 py-1.5 px-3 rounded-lg text-label-md font-label-md text-[#94A3B8] hover:text-[#F8FAFC] transition-all">
+          A Receber
+        </button>
+</nav>
+<!-- Lista de Compras Parceladas com Cards Detalhados -->
+<section class="space-y-3.5">
+<div class="flex items-center justify-between">
+<h2 class="text-headline-sm font-headline-sm text-[#F8FAFC]">Contratos Ativos</h2>
+<span class="text-label-md font-label-md text-[#94A3B8]">3 contratos</span>
+</div>
+<!-- Card 1: Notebook Dell Inspiron -->
+<article class="bg-[#131B2E] border border-[#2A374F] rounded-xl p-space-md shadow-md relative space-y-3.5 transition-all">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#0B1326] border border-[#2A374F] flex items-center justify-center text-[#38BDF8]">
+<span class="material-symbols-outlined text-[20px]">laptop_mac</span>
+</div>
+<div>
+<h3 class="text-body-lg font-body-lg font-semibold text-[#F8FAFC]">Notebook Dell Inspiron</h3>
+<span class="text-label-md font-label-md text-[#94A3B8]">12x de R$ 100,00</span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-numeric-table font-numeric-table text-[#F8FAFC] font-semibold">R$ 1.200,00</div>
+<span class="text-label-md font-label-md text-[#94A3B8]">Total</span>
+</div>
+</div>
+<!-- Progress Bar & Status (25%) -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-label-md font-label-md">
+<span class="font-semibold text-[#10B981]">3/12 pagas (25%)</span>
+<span class="text-[#94A3B8]">Restante: <strong class="text-[#F8FAFC]">R$ 900,00</strong> (9 parcelas)</span>
+</div>
+<div class="w-full bg-[#0B1326] h-2 rounded-full overflow-hidden border border-[#2A374F]/50">
+<div class="bg-[#10B981] h-full rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" style="width: 25%;"></div>
+</div>
+</div>
+<!-- Bottom Action Row -->
+<div class="flex items-center justify-between pt-2 border-t border-[#2A374F]/60">
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-[#94A3B8]">
+<span class="material-symbols-outlined text-[16px] text-[#FFB2B7]">calendar_today</span>
+<span>Próximo vencimento: <strong class="text-[#F8FAFC]">10/10/2026</strong></span>
+</div>
+<button class="bg-[#10B981] hover:bg-[#00855D] text-[#002113] hover:text-white font-semibold text-label-md font-label-md px-3 py-1.5 rounded-lg flex items-center gap-1 active:scale-95 transition-all">
+<span>Pagar parcela 4</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 2: Smartphone Samsung Galaxy -->
+<article class="bg-[#131B2E] border border-[#2A374F] rounded-xl p-space-md shadow-md relative space-y-3.5 transition-all">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#0B1326] border border-[#2A374F] flex items-center justify-center text-[#38BDF8]">
+<span class="material-symbols-outlined text-[20px]">smartphone</span>
+</div>
+<div>
+<h3 class="text-body-lg font-body-lg font-semibold text-[#F8FAFC]">Smartphone Samsung Galaxy</h3>
+<span class="text-label-md font-label-md text-[#94A3B8]">10x de R$ 240,00</span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-numeric-table font-numeric-table text-[#F8FAFC] font-semibold">R$ 2.400,00</div>
+<span class="text-label-md font-label-md text-[#94A3B8]">Total</span>
+</div>
+</div>
+<!-- Progress Bar & Status (60%) -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-label-md font-label-md">
+<span class="font-semibold text-[#10B981]">6/10 pagas (60%)</span>
+<span class="text-[#94A3B8]">Restante: <strong class="text-[#F8FAFC]">R$ 960,00</strong></span>
+</div>
+<div class="w-full bg-[#0B1326] h-2 rounded-full overflow-hidden border border-[#2A374F]/50">
+<div class="bg-[#10B981] h-full rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" style="width: 60%;"></div>
+</div>
+</div>
+<!-- Card Details Footer -->
+<div class="flex items-center justify-between pt-2 border-t border-[#2A374F]/60 text-body-sm font-body-sm">
+<div class="flex items-center gap-1.5 text-[#94A3B8]">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span>Vencimento: <strong class="text-[#F8FAFC]">15/10/2026</strong></span>
+</div>
+<span class="px-2.5 py-0.5 rounded-lg bg-[#38BDF8]/10 text-[#7BD0FF] border border-[#38BDF8]/20 text-label-md font-label-md font-semibold">
+              4 parcelas restantes
+            </span>
+</div>
+</article>
+<!-- Card 3: Curso de Especialização UX -->
+<article class="bg-[#131B2E] border border-[#2A374F] rounded-xl p-space-md shadow-md relative space-y-3.5 transition-all">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#0B1326] border border-[#2A374F] flex items-center justify-center text-[#38BDF8]">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-body-lg font-body-lg font-semibold text-[#F8FAFC]">Curso de Especialização UX</h3>
+</div>
+<span class="text-label-md font-label-md text-[#94A3B8]">6x de R$ 100,00</span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-numeric-table font-numeric-table text-[#F8FAFC] font-semibold">R$ 600,00</div>
+<span class="text-label-md font-label-md text-[#94A3B8]">Total</span>
+</div>
+</div>
+<!-- Progress Bar & Status (83%) -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-label-md font-label-md">
+<span class="font-semibold text-[#10B981]">5/6 pagas (83%)</span>
+<span class="text-[#FFB2B7] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+                Restante: R$ 100,00 (Última parcela!)
+              </span>
+</div>
+<div class="w-full bg-[#0B1326] h-2 rounded-full overflow-hidden border border-[#2A374F]/50">
+<div class="bg-[#10B981] h-full rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" style="width: 83%;"></div>
+</div>
+</div>
+<!-- Card Details Footer -->
+<div class="flex items-center justify-between pt-2 border-t border-[#2A374F]/60 text-body-sm font-body-sm">
+<div class="flex items-center gap-1.5 text-[#94A3B8]">
+<span class="material-symbols-outlined text-[16px]">event_repeat</span>
+<span>Finalização: <strong class="text-[#4EDE83]">Novembro / 2026</strong></span>
+</div>
+<span class="px-2.5 py-0.5 rounded-lg bg-[#FF7886]/15 border border-[#FF7886]/30 text-[#FFB2B7] font-semibold text-label-md font-label-md">
+              Reta Final
+            </span>
+</div>
+</article>
+</section>
+<!-- Bottom Sheet / Card Informativo: Impacto no Próximo Mês -->
+<section class="bg-gradient-to-r from-[#131B2E] to-[#1A253E] border border-[#38BDF8]/20 rounded-xl p-4 shadow-md flex items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#38BDF8]/20 text-[#7BD0FF] flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">trending_down</span>
+</div>
+<div>
+<div class="text-label-md font-label-md text-[#94A3B8]">Impacto no próximo mês:</div>
+<div class="text-numeric-table font-numeric-table text-[#F8FAFC] font-semibold text-[16px]">
+              R$ 440,00 <span class="text-label-md font-normal text-[#94A3B8]">em parcelas</span>
+</div>
+</div>
+</div>
+<button class="px-3 py-1.5 bg-[#0B1326] text-[#7BD0FF] text-label-md font-label-md font-semibold rounded-lg border border-[#38BDF8]/30 hover:bg-[#131B2E] transition-colors">
+          Simular fluxo
+        </button>
+</section>
+</main>
+<!-- BottomNavBar Anchor from Shared Components JSON -->
+<!-- Active: 'Parcelas' (Exact match: Array index 3) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-space-xs py-space-xs max-w-lg mx-auto left-0 right-0 bg-[#0B1326]/95 backdrop-blur-md border-t border-[#2A374F]">
+<!-- Início -->
+<button class="flex flex-col items-center justify-center text-[#94A3B8] py-1 active:scale-95 transition-transform duration-150 hover:text-[#4EDE83]">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="text-label-md font-label-md">Início</span>
+</button>
+<!-- Extrato -->
+<button class="flex flex-col items-center justify-center text-[#94A3B8] py-1 active:scale-95 transition-transform duration-150 hover:text-[#4EDE83]">
+<span class="material-symbols-outlined text-[24px]">receipt_long</span>
+<span class="text-label-md font-label-md">Extrato</span>
+</button>
+<!-- Novo (Contextual Action Icon) -->
+<button class="flex flex-col items-center justify-center text-[#94A3B8] py-1 active:scale-95 transition-transform duration-150 hover:text-[#4EDE83]">
+<div class="w-8 h-8 rounded-full bg-[#10B981] text-[#002113] flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</div>
+<span class="text-label-md font-label-md mt-0.5">Novo</span>
+</button>
+<!-- Parcelas (Active Navigation Tab) -->
+<button class="flex flex-col items-center justify-center text-[#4EDE83] font-semibold py-1 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">credit_card</span>
+<span class="text-label-md font-label-md">Parcelas</span>
+</button>
+<!-- Mais -->
+<button class="flex flex-col items-center justify-center text-[#94A3B8] py-1 active:scale-95 transition-transform duration-150 hover:text-[#4EDE83]">
+<span class="material-symbols-outlined text-[24px]">more_horiz</span>
+<span class="text-label-md font-label-md">Mais</span>
+</button>
+</nav>
+</div>
+</body></html>

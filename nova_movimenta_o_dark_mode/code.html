@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinanceFlow - Nova Movimentação</title>
+<!-- Google Fonts: Inter & Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-lowest": "#060e20",
+            "background": "#0b1326",
+            "surface": "#0b1326",
+            "surface-container-low": "#131b2e",
+            "surface-container": "#171f33",
+            "surface-container-high": "#222a3d",
+            "surface-container-highest": "#2d3449",
+            "surface-variant": "#2d3449",
+            "on-surface": "#dae2fd",
+            "on-surface-variant": "#94a3b8",
+            "outline": "#475569",
+            "outline-variant": "#2a374f",
+            "primary": "#10b981",
+            "primary-container": "#059669",
+            "on-primary": "#003824",
+            "primary-fixed": "#6ffbbe",
+            "secondary": "#7bd0ff",
+            "secondary-container": "#004c69",
+            "on-secondary": "#00354a",
+            "secondary-fixed": "#1e3a5f",
+            "tertiary": "#ff7886",
+            "tertiary-container": "#ff7886",
+            "on-tertiary-container": "#780021",
+            "error": "#ffb4ab",
+            "error-container": "#93000a",
+            "on-background": "#dae2fd"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "margin": "1rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "numeric-table": ["Inter"],
+            "numeric-currency": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "display-lg": ["Inter"],
+            "label-lg": ["Inter"]
+          },
+          "fontSize": {
+            "numeric-table": ["14px", { "lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500" }],
+            "numeric-currency": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "600" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-outlined[data-weight="fill"] {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .cursor-caret {
+      animation: blink 1s ease-in-out infinite;
+    }
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary selection:text-on-primary">
+<!-- Modal/Form Flow Screen Container (Dark Mobile Frame) -->
+<div class="w-full max-w-lg mx-auto flex-1 flex flex-col bg-background min-h-screen shadow-2xl relative pb-28">
+<!-- Top Bar Focused Action -->
+<header class="sticky top-0 z-30 bg-background/90 backdrop-blur-md px-margin h-14 flex items-center justify-between border-b border-outline-variant">
+<button aria-label="Fechar" class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<h1 class="text-headline-sm font-headline-sm text-on-surface font-semibold text-center tracking-tight">Nova Movimentação</h1>
+<button aria-label="Mais Opções" class="w-10 h-10 -mr-2 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</header>
+<main class="flex-1 px-margin pt-space-md space-y-space-md">
+<!-- Alternador de Tipo de Transação (Tabs Deslizantes) -->
+<section aria-label="Tipo de Movimentação">
+<div class="grid grid-cols-3 p-1 bg-surface-container-low rounded-xl gap-1 border border-outline-variant/60">
+<!-- Despesa (Ativa) -->
+<button class="flex items-center justify-center gap-1.5 py-2 px-space-xs rounded-lg text-label-lg font-label-lg bg-surface-container-high text-tertiary-container shadow-sm border border-outline-variant transition-all font-semibold" id="tab-expense" onclick="switchType('expense')" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="trending_down">trending_down</span>
+<span>Despesa</span>
+</button>
+<!-- Receita -->
+<button class="flex items-center justify-center gap-1.5 py-2 px-space-xs rounded-lg text-label-lg font-label-lg text-on-surface-variant hover:text-on-surface transition-all" id="tab-income" onclick="switchType('income')" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="trending_up">trending_up</span>
+<span>Receita</span>
+</button>
+<!-- Transferência -->
+<button class="flex items-center justify-center gap-1.5 py-2 px-space-xs rounded-lg text-label-lg font-label-lg text-on-surface-variant hover:text-on-surface transition-all" id="tab-transfer" onclick="switchType('transfer')" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="swap_horiz">swap_horiz</span>
+<span>Transferência</span>
+</button>
+</div>
+</section>
+<!-- Display Hero Expressivo de Valor Financeiro -->
+<section class="bg-surface-container-low rounded-xl p-space-md text-center border border-outline-variant flex flex-col items-center justify-center relative overflow-hidden">
+<span class="text-label-md font-label-md text-on-surface-variant mb-1 uppercase tracking-wider font-semibold">Valor da Transação</span>
+<div class="flex items-baseline justify-center text-tertiary-container transition-colors duration-200" id="value-display-wrapper">
+<span class="text-headline-md font-headline-md font-bold mr-1 tracking-tight">R$</span>
+<span class="text-display-lg-mobile font-display-lg-mobile font-bold tracking-tighter" id="display-value">150,00</span>
+<span class="w-[2.5px] h-7 bg-tertiary-container inline-block ml-1 cursor-caret align-middle rounded-full" id="blinking-caret"></span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant/80 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="touch_app">touch_app</span>
+          Toque para alterar via teclado numérico
+        </p>
+</section>
+<!-- Seletor de Modalidade de Pagamento em Botões Pill -->
+<section class="space-y-space-xs">
+<label class="block text-label-md font-label-md text-on-surface-variant font-medium">Modalidade</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="py-2 px-space-xs rounded-lg text-label-md font-label-md border text-center transition-all bg-surface-container-low border-outline-variant text-on-surface-variant hover:border-outline hover:text-on-surface" id="btn-vista" onclick="setModality('vista')" type="button">
+            À Vista
+          </button>
+<button class="py-2 px-space-xs rounded-lg text-label-md font-label-md border text-center transition-all bg-secondary/15 text-secondary border-secondary/60 font-semibold shadow-sm" id="btn-parcelado" onclick="setModality('parcelado')" type="button">
+            Parcelado
+          </button>
+<button class="py-2 px-space-xs rounded-lg text-label-md font-label-md border text-center transition-all bg-surface-container-low border-outline-variant text-on-surface-variant hover:border-outline hover:text-on-surface" id="btn-recorrente" onclick="setModality('recorrente')" type="button">
+            Recorrente
+          </button>
+</div>
+<!-- Painel Dinâmico de Parcelamento -->
+<div class="mt-2 p-space-md bg-surface-container-low rounded-xl border border-secondary/30 flex flex-col gap-3 transition-all" id="panel-installments">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface font-medium flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="credit_card">credit_card</span>
+              Condições da Compra
+            </span>
+<span class="text-body-sm font-body-sm text-secondary font-semibold bg-secondary/10 px-2 py-0.5 rounded border border-secondary/20">Plano Padrão</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="text-body-sm font-body-sm text-on-surface-variant block mb-1" for="installment-count">Parcelas</label>
+<select class="w-full h-10 px-3 text-body-md font-body-md bg-surface-container-high border border-outline-variant rounded-lg text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary" id="installment-count" onchange="calculateInstallments()">
+<option class="bg-surface-container-high text-on-surface" value="1">1x (Sem juros)</option>
+<option class="bg-surface-container-high text-on-surface" value="2">2x</option>
+<option class="bg-surface-container-high text-on-surface" value="3">3x</option>
+<option class="bg-surface-container-high text-on-surface" value="6">6x</option>
+<option class="bg-surface-container-high text-on-surface" value="10">10x</option>
+<option class="bg-surface-container-high text-on-surface" selected="" value="12">12x</option>
+</select>
+</div>
+<div>
+<label class="text-body-sm font-body-sm text-on-surface-variant block mb-1">Valor Unitário</label>
+<div class="h-10 px-3 flex items-center bg-surface-container-high border border-outline-variant rounded-lg">
+<span class="text-numeric-table font-numeric-table text-on-surface" id="installment-val">12x de R$ 12,50</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Campos de Formulário Organizados -->
+<section class="space-y-space-md pt-1">
+<!-- Descrição -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1 font-medium" for="desc">Descrição</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-on-surface-variant material-symbols-outlined text-[20px]" data-icon="edit_note">edit_note</span>
+<input class="w-full h-10 pl-10 pr-3 rounded-lg border border-outline-variant text-body-md font-body-md text-on-surface bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none placeholder:text-outline" id="desc" placeholder="Ex: Mercado, Aluguel, Combustível" type="text" value="Compras do Mês - Supermercado"/>
+</div>
+</div>
+<!-- Categoria com Chips Horizontais -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<label class="text-label-md font-label-md text-on-surface-variant font-medium">Categoria</label>
+<button class="text-label-md font-label-md text-primary font-semibold hover:underline" type="button">Ver todas</button>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none" id="category-chips">
+<!-- Moradia -->
+<button class="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface-variant text-label-md font-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" onclick="selectCategory(this)" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="home">home</span>
+<span>Moradia</span>
+</button>
+<!-- Alimentação (Selecionado) -->
+<button class="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary/50 bg-primary/10 text-primary text-label-md font-label-md font-semibold transition-colors" onclick="selectCategory(this)" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="restaurant" data-weight="fill">restaurant</span>
+<span>Alimentação</span>
+</button>
+<!-- Transporte -->
+<button class="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface-variant text-label-md font-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" onclick="selectCategory(this)" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="directions_car">directions_car</span>
+<span>Transporte</span>
+</button>
+<!-- Lazer -->
+<button class="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface-variant text-label-md font-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" onclick="selectCategory(this)" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="sports_esports">sports_esports</span>
+<span>Lazer</span>
+</button>
+<!-- Saúde -->
+<button class="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface-variant text-label-md font-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" onclick="selectCategory(this)" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="local_hospital">local_hospital</span>
+<span>Saúde</span>
+</button>
+</div>
+</div>
+<!-- Data de Vencimento / Pagamento -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1 font-medium" for="date-input">Data de Vencimento / Pagamento</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-on-surface-variant material-symbols-outlined text-[20px]" data-icon="calendar_today">calendar_today</span>
+<input class="w-full h-10 pl-10 pr-3 rounded-lg border border-outline-variant text-body-md font-body-md text-on-surface bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" id="date-input" type="text" value="Hoje, 24/09/2026"/>
+</div>
+</div>
+<!-- Conta / Forma de Pagamento (Dropdown) -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1 font-medium" for="account-select">Conta / Forma de Pagamento</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-secondary material-symbols-outlined text-[20px]" data-icon="account_balance_wallet">account_balance_wallet</span>
+<select class="w-full h-10 pl-10 pr-8 rounded-lg border border-outline-variant text-body-md font-body-md text-on-surface bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none appearance-none" id="account-select">
+<option class="bg-surface-container-high text-on-surface" selected="" value="nubank">Nubank Cartão de Crédito (Limite disp. R$ 4.250,00)</option>
+<option class="bg-surface-container-high text-on-surface" value="itau">Itaú Corrente (Saldo: R$ 1.840,20)</option>
+<option class="bg-surface-container-high text-on-surface" value="dinheiro">Dinheiro Físico / Carteira</option>
+</select>
+<span class="absolute right-3 text-outline pointer-events-none material-symbols-outlined text-[18px]" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Toggle Switch: Marcar como Já Pago / Efetivado -->
+<div class="bg-surface-container-low p-space-md rounded-xl border border-outline-variant flex items-center justify-between">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px] mt-0.5" data-icon="task_alt" data-weight="fill">task_alt</span>
+<div>
+<p class="text-body-md font-body-md font-semibold text-on-surface leading-tight">Marcar como já pago / efetivado</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-tight mt-0.5" id="toggle-status-text">Valor será debitado do saldo imediatamente.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer ml-3">
+<input checked="" class="sr-only peer" id="status-toggle" onchange="handleToggleStatus(this)" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest border border-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</section>
+</main>
+<!-- Barra de Ação Fixa Inferior com CTA Proeminente -->
+<footer class="fixed bottom-0 left-0 right-0 max-w-lg mx-auto p-margin bg-background/90 backdrop-blur-md border-t border-outline-variant z-40">
+<button class="w-full h-12 bg-primary hover:bg-primary-container text-on-primary font-headline-sm text-headline-sm rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-[0.98] transition-all font-semibold" onclick="handleSubmit()" type="button">
+<span class="material-symbols-outlined text-[22px]" data-icon="check_circle">check_circle</span>
+<span>Salvar Movimentação</span>
+</button>
+</footer>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    let currentType = 'expense';
+    let baseAmount = 150.00;
+
+    function switchType(type) {
+      currentType = type;
+      const expenseBtn = document.getElementById('tab-expense');
+      const incomeBtn = document.getElementById('tab-income');
+      const transferBtn = document.getElementById('tab-transfer');
+      const displayWrapper = document.getElementById('value-display-wrapper');
+      const caret = document.getElementById('blinking-caret');
+
+      // Reset tabs styling
+      const defaultClass = "flex items-center justify-center gap-1.5 py-2 px-space-xs rounded-lg text-label-lg font-label-lg text-on-surface-variant hover:text-on-surface transition-all";
+      expenseBtn.className = defaultClass;
+      incomeBtn.className = defaultClass;
+      transferBtn.className = defaultClass;
+
+      if (type === 'expense') {
+        expenseBtn.className = "flex items-center justify-center gap-1.5 py-2 px-space-xs rounded-lg text-label-lg font-label-lg bg-surface-container-high text-tertiary-container shadow-sm border border-outline-variant transition-all font-semibold";
+        displayWrapper.className = "flex items-baseline justify-center text-tertiary-container transition-colors duration-200";
+        caret.className = "w-[2.5px] h-7 bg-tertiary-container inline-block ml-1 cursor-caret align-middle rounded-full";
+      } else if (type === 'income') {
+        incomeBtn.className = "flex items-center justify-center gap-1.5 py-2 px-space-xs rounded-lg text-label-lg font-label-lg bg-surface-container-high text-primary shadow-sm border border-outline-variant transition-all font-semibold";
+        displayWrapper.className = "flex items-baseline justify-center text-primary transition-colors duration-200";
+        caret.className = "w-[2.5px] h-7 bg-primary inline-block ml-1 cursor-caret align-middle rounded-full";
+      } else {
+        transferBtn.className = "flex items-center justify-center gap-1.5 py-2 px-space-xs rounded-lg text-label-lg font-label-lg bg-surface-container-high text-secondary shadow-sm border border-outline-variant transition-all font-semibold";
+        displayWrapper.className = "flex items-baseline justify-center text-secondary transition-colors duration-200";
+        caret.className = "w-[2.5px] h-7 bg-secondary inline-block ml-1 cursor-caret align-middle rounded-full";
+      }
+    }
+
+    function setModality(mode) {
+      const btnVista = document.getElementById('btn-vista');
+      const btnParc = document.getElementById('btn-parcelado');
+      const btnRec = document.getElementById('btn-recorrente');
+      const panel = document.getElementById('panel-installments');
+
+      const inactiveClass = "py-2 px-space-xs rounded-lg text-label-md font-label-md border text-center transition-all bg-surface-container-low border-outline-variant text-on-surface-variant hover:border-outline hover:text-on-surface";
+      const activeClass = "py-2 px-space-xs rounded-lg text-label-md font-label-md border text-center transition-all bg-secondary/15 text-secondary border-secondary/60 font-semibold shadow-sm";
+
+      btnVista.className = inactiveClass;
+      btnParc.className = inactiveClass;
+      btnRec.className = inactiveClass;
+
+      if (mode === 'parcelado') {
+        btnParc.className = activeClass;
+        panel.classList.remove('hidden');
+      } else if (mode === 'vista') {
+        btnVista.className = activeClass;
+        panel.classList.add('hidden');
+      } else {
+        btnRec.className = activeClass;
+        panel.classList.add('hidden');
+      }
+    }
+
+    function calculateInstallments() {
+      const count = parseInt(document.getElementById('installment-count').value, 10);
+      const val = (baseAmount / count).toFixed(2).replace('.', ',');
+      document.getElementById('installment-val').textContent = `${count}x de R$ ${val}`;
+    }
+
+    function selectCategory(buttonElement) {
+      const container = document.getElementById('category-chips');
+      const buttons = container.querySelectorAll('button');
+      
+      buttons.forEach(btn => {
+        btn.className = "flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface-variant text-label-md font-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors";
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) icon.removeAttribute('data-weight');
+      });
+
+      buttonElement.className = "flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary/50 bg-primary/10 text-primary text-label-md font-label-md font-semibold transition-colors";
+      const activeIcon = buttonElement.querySelector('.material-symbols-outlined');
+      if (activeIcon) activeIcon.setAttribute('data-weight', 'fill');
+    }
+
+    function handleToggleStatus(checkbox) {
+      const desc = document.getElementById('toggle-status-text');
+      if (checkbox.checked) {
+        desc.textContent = "Valor será debitado do saldo imediatamente.";
+      } else {
+        desc.textContent = "Agendado como compromisso financeiro futuro.";
+      }
+    }
+
+    function handleSubmit() {
+      const btn = event.currentTarget;
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-[22px]" data-icon="refresh">refresh</span><span>Salvando...</span>`;
+      setTimeout(() => {
+        btn.innerHTML = `<span class="material-symbols-outlined text-[22px]" data-icon="done">done</span><span>Registrado com Sucesso!</span>`;
+        btn.classList.remove('bg-primary');
+        btn.classList.add('bg-primary-container');
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.classList.remove('bg-primary-container');
+          btn.classList.add('bg-primary');
+        }, 1500);
+      }, 700);
+    }
+  </script>
+</body></html>

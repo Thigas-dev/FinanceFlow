@@ -1,0 +1,12 @@
+.gradle/
+build/
+composeApp/build/
+local.properties
+keystore.properties
+*.jks
+.idea/
+iosApp/FinanceFlow.xcodeproj/
+build/
+Payload/
+*.ipa
+*.apk

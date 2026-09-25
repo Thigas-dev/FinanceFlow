@@ -1,0 +1,48 @@
+# Projeto Xcode gerado pelo XcodeGen (brew install xcodegen && xcodegen generate).
+name: FinanceFlow
+options:
+  bundleIdPrefix: com.financeflow
+  deploymentTarget:
+    iOS: "15.0"
+targets:
+  FinanceFlow:
+    type: application
+    platform: iOS
+    sources:
+      - iosApp
+    info:
+      path: iosApp/Info.plist
+      properties:
+        CFBundleDisplayName: FinanceFlow
+        CFBundleShortVersionString: "1.1"
+        CFBundleVersion: "2"
+        UILaunchScreen:
+          UIColorName: ""
+        UIUserInterfaceStyle: Dark
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        CADisableMinimumFrameDurationOnPhone: true
+        ITSAppUsesNonExemptEncryption: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.financeflow.app
+        PRODUCT_NAME: FinanceFlow
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+        FRAMEWORK_SEARCH_PATHS: "$(SRCROOT)/../composeApp/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)"
+        OTHER_LDFLAGS: ["$(inherited)", "-framework", "ComposeApp"]
+    preBuildScripts:
+      - name: Compilar código Kotlin (ComposeApp.framework)
+        basedOnDependencyAnalysis: false
+        script: |
+          cd "$SRCROOT/.."
+          sh ./gradlew :composeApp:embedAndSignAppleFrameworkForXcode
+schemes:
+  FinanceFlow:
+    build:
+      targets:
+        FinanceFlow: all
+    run:
+      config: Debug
+    archive:
+      config: Release
